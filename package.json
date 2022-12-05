@@ -1,0 +1,15 @@
+{
+  "name": "car-financing-simulator",
+  "version": "1.0.0",
+  "description": "this project focuses on setting up a web page to calculate car finance.",
+  "main": "index.js",
+  "repository": "git@github.com:rsales/car-financing-simulator.git",
+  "author": "rsales <rafael.sales93@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "http-server --proxy http://localhost:8080?"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
