@@ -2,11 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
 </head>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <body>
-  <h1>hello world</h1>
+  <div  class="container mx-auto px-4" id="app">
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Valor do Carro:
+        </label>
+        <input class="money-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" v-model="carPrice">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Valor de entrada:
+        </label>
+        <input class="money-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" v-model="entryValue">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Valor a financiar:
+        </label>
+        <input class="money-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" v-model="amountToBeFinanced" readonly>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Quantidade de parcelas:
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" v-model="installments">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Taxa de juros efetiva:
+        </label>
+        <input class="percentage-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" v-model="tax">
+      </div>
+      <!-- <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+          Sign In
+        </button>
+        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+          Forgot Password?
+        </a>
+      </div> -->
+    </form>
+    <div class="result">
+      <h2>Resultado:</h2>
+      <p>
+        Simulação do financiamento do veículo com taxa de juros do formulário acima:
+        <br><br>
+        <strong>Simulando com taxa de juros de {{ tax }}:</strong> Valor do veículo de {{ carPrice }} ; entrada no valor de {{ entryValue }} ; financiando {{ amountToBeFinanced }} e pagando em {{ installments }} parcelas:
+      </p>
+      <ul>
+        <li>O valor da parcela mensal será de R$ 1.793,65 ;</li>
+        <li>O total será de ({{ installments }} X R$ 1.793,65) = R$ 64.571,40 ;</li>
+        <!-- <li>Os juros gerados será de (valor total menos valor financiado): ( R$ 64.571,40 - R$ 48.000,00) = R$ 16.571,40 ;</li>
+        <li>IPVA anual aproximado = ( R$ 48.000,00 X 4% ) = R$ 1.920,00</li> -->
+      </ul>
+    </div>
+    <br>
+    <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
+  </div>
+
+  <div id="divadsensedisplaynone" style="display:none;">
+    <!-- put here all adsense code -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-xxxxxx"
+        data-ad-slot="xxxxxx"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-masker@1.1.1/lib/vanilla-masker.js"></script>
+  <script src="./index.js"></script>
 </body>
 </html>
