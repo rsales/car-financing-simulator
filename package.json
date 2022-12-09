@@ -1,15 +1,19 @@
 {
   "name": "car-financing-simulator",
-  "version": "1.0.0",
-  "description": "this project focuses on setting up a web page to calculate car finance.",
-  "main": "index.js",
-  "repository": "git@github.com:rsales/car-financing-simulator.git",
-  "author": "rsales <rafael.sales93@hotmail.com>",
-  "license": "MIT",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "http-server --proxy http://localhost:8080?"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "http-server": "^14.1.1"
+    "vanilla-masker": "^1.2.0",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "vite": "^3.2.4"
   }
 }

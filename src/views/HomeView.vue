@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <title>Document</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<body>
-  <div  class="container mx-auto px-4" id="app">
+<script setup>
+</script>
+<template>
+  <div class="container mx-auto px-4">
     <form>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
@@ -70,21 +62,114 @@
       </ul>
     </div>
   </div>
+</template>
 
-  <div id="divadsensedisplaynone" style="display:none;">
-    <!-- put here all adsense code -->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-xxxxxx"
-        data-ad-slot="xxxxxx"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vanilla-masker@1.1.1/lib/vanilla-masker.js"></script>
-  <script src="./index.js"></script>
-</body>
-</html>
+<!-- <script setup>
+import { ref } from 'vue'
+
+let carPrice = ref('R$ 79.990,00');
+let entryValue = ref('R$ 20.00000');
+let installments = ref(36);
+let tax = ref('1,70 %');
+let adsenseContent = ref('');
+</script> -->
+
+<script>
+import VMasker from 'vanilla-masker';
+
+export default {
+  data() {
+    return {
+      carPrice: 'R$ 79.990,00',
+      entryValue: 'R$ 20.000,00',
+      installments: 36,
+      tax: '1,70 %',
+      adsenseContent: '',
+    }
+  },
+  computed: { 
+    amountToBeFinanced() {
+      let calc = VMasker.toNumber(this.carPrice) - VMasker.toNumber(this.entryValue)
+      return VMasker.toMoney(calc, {
+        precision: 2,
+        separator: ',',
+        delimiter: '.',
+        unit: 'R$',
+        zeroCents: false
+      })
+    },
+    monthlyInstallmentAmount() {
+      let amountToBeFinanced = VMasker.toNumber(this.carPrice) - VMasker.toNumber(this.entryValue)
+      let i = Number(VMasker.toNumber(this.tax)) / 100
+
+      let calOne = ((1 + (i / 100)) ** this.installments) * (i / 100)
+      let calTwo = ((1 + (i / 100)) ** this.installments) - 1
+      let result = (amountToBeFinanced * calOne) / calTwo;
+
+      return VMasker.toMoney(Math.floor(result), {
+        precision: 2,
+        separator: ',',
+        delimiter: '.',
+        unit: 'R$',
+        zeroCents: false
+      })
+    },
+    totaly() {
+      let calc = this.installments * VMasker.toNumber(this.monthlyInstallmentAmount)
+      return VMasker.toMoney(calc, {
+        precision: 2,
+        separator: ',',
+        delimiter: '.',
+        unit: 'R$',
+        zeroCents: false
+      })
+    }
+  },
+  methods: {
+    moneyFormatter(value) {
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+      return formatter.format(value)
+    },
+    parcelas () {
+      let amountToBeFinanced = VMasker.toNumber(this.carPrice) - VMasker.toNumber(this.entryValue)
+      let i = Number(VMasker.toNumber(this.tax)) / 100
+
+      let calOne = ((1 + (i / 100)) ** this.installments) * (i / 100)
+      let calTwo = ((1 + (i / 100)) ** this.installments) - 1
+      let result = (amountToBeFinanced * calOne) / calTwo;
+
+      console.log(Math.floor(result))
+      console.log(
+        VMasker.toMoney(Math.floor(result), {
+          precision: 1,
+          separator: ',',
+          delimiter: '.',
+          unit: 'R$',
+          zeroCents: false
+        }))
+    }
+  },
+  mounted() {
+    // this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
+
+    VMasker(document.querySelectorAll(".money-input")).maskMoney({
+      precision: 2,
+      separator: ',',
+      delimiter: '.',
+      unit: 'R$',
+      zeroCents: false
+    });
+
+    VMasker(document.querySelector(".percentage-input")).maskMoney({
+      precision: 2,
+      separator: ',',
+      delimiter: '.',
+      suffixUnit: '%',
+      zeroCents: false
+    });
+  }
+}
+</script>
