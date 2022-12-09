@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <title>Document</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
 </head>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <body>
@@ -51,6 +50,11 @@
         </a>
       </div> -->
     </form>
+
+    <br>
+    <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
+    <br>
+
     <div class="result">
       <h2>Resultado:</h2>
       <p>
@@ -59,14 +63,12 @@
         <strong>Simulando com taxa de juros de {{ tax }}:</strong> Valor do veículo de {{ carPrice }} ; entrada no valor de {{ entryValue }} ; financiando {{ amountToBeFinanced }} e pagando em {{ installments }} parcelas:
       </p>
       <ul>
-        <li>O valor da parcela mensal será de R$ 1.793,65 ;</li>
-        <li>O total será de ({{ installments }} X R$ 1.793,65) = R$ 64.571,40 ;</li>
+        <li>O valor da parcela mensal será de {{ monthlyInstallmentAmount }} ;</li>
+        <li>O total será de ({{ installments }} X {{ monthlyInstallmentAmount }}) = {{ totaly }} ;</li>
         <!-- <li>Os juros gerados será de (valor total menos valor financiado): ( R$ 64.571,40 - R$ 48.000,00) = R$ 16.571,40 ;</li>
         <li>IPVA anual aproximado = ( R$ 48.000,00 X 4% ) = R$ 1.920,00</li> -->
       </ul>
     </div>
-    <br>
-    <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
   </div>
 
   <div id="divadsensedisplaynone" style="display:none;">
