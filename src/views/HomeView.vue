@@ -25,7 +25,7 @@
 				<label class="block text-gray-700 text-sm font-bold mb-2" for="installments">
 					Quantidade de parcelas:
 				</label>
-				<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:border-indigo-500 focus:ring-indigo-500" id="username" type="installments" v-model="installments" @keyup="showResult = false">
+				<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:border-indigo-500 focus:ring-indigo-500" id="installments" type="number" v-model="installments" @keyup="showResult = false">
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2" for="tax">
@@ -90,7 +90,7 @@
 							</div>
 							<div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 								<dt class="text-sm font-medium text-gray-500">IPVA anual aproximado</dt>
-								<dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">({{ amountToBeFinanced }} X 4%) = R$ 1.920,00</dd>
+								<dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">({{ carPrice }} X 4%) = {{ ipvaCalc }}</dd>
 							</div>
 						</dl>
 					</div>
@@ -144,6 +144,10 @@ export default {
 		},
 		interestGenerated() {
 			let calc = VMasker.toNumber(this.totaly) - VMasker.toNumber(this.amountToBeFinanced)
+			return this.convertMoney(calc);
+		},
+		ipvaCalc() {
+			let calc = VMasker.toNumber(this.carPrice) *  (4 / 100)
 			return this.convertMoney(calc);
 		},
 		disabledButton() {
