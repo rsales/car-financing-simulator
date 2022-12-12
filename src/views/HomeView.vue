@@ -111,7 +111,7 @@ export default {
 	data() {
 		return {
 			carPrice: 'R$ 79.990,00',
-			entryValue: 'R$ 20.000,00',
+			entryValue: 'R$ 0,00',
 			installments: 36,
 			tax: '1,70 %',
 			adsenseContent: '',
@@ -151,6 +151,13 @@ export default {
 		}
 	},
 	methods: {
+    moneyFormatter(value) {
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+      return formatter.format(value)
+    },
 		scrollResult() {
 			this.$router.push('/#result')
 			document.getElementById('result').scrollIntoView({
