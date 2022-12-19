@@ -40,7 +40,7 @@
 					@click="sendSimulation()"
 					:disabled="disabledButton"
 				>
-					🤑 Fazer Simulação
+					Fazer Simulação 👍
 				</button>
 			</div>
 		</form>
@@ -97,6 +97,14 @@
 				</div>
 			</div>
 		</Transition>
+		<a
+			id="downloadCSV"
+			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:border-indigo-500 focus:ring-indigo-500 mt-7"
+			type="button"
+			v-show="showResult"
+		>
+			⬇ Baixar planilha de parcelas
+		</a>
 	</div>
 	<TheFooter />
 </template>
@@ -116,6 +124,7 @@ export default {
 			tax: '1,70 %',
 			adsenseContent: '',
 			showResult: false,
+			installmentMonth: [],
 		}
 	},
 	components: {
@@ -180,6 +189,49 @@ export default {
 		sendSimulation() {
 			this.showResult = !this.showResult;
 			setTimeout(this.scrollResult, 200);
+
+			this.installmentMonthByMonth();
+		},
+		installmentMonthByMonth() {
+			let interaction = 1;
+			let lastSaldoDevedor = VMasker.toNumber(this.amountToBeFinanced);
+			let lastInterest = VMasker.toNumber(this.amountToBeFinanced) * ((VMasker.toNumber(this.tax) / 100) / 100);
+			let lastAmortizado = VMasker.toNumber(this.monthlyInstallmentAmount) - lastInterest;
+
+			for (interaction; interaction <= this.installments; interaction++) {
+				lastInterest =  Math.floor(lastSaldoDevedor * ((VMasker.toNumber(this.tax) / 100) / 100));
+				lastAmortizado = VMasker.toNumber(this.monthlyInstallmentAmount) - lastInterest;
+				lastSaldoDevedor = lastSaldoDevedor - lastAmortizado;
+
+				this.installmentMonth.push({
+					n_prestacao: interaction,
+					prestacao: this.monthlyInstallmentAmount,
+					juros: this.convertMoney(lastInterest),
+					amortizado: this.convertMoney(lastAmortizado),
+					saldo_devedor: this.convertMoney(lastSaldoDevedor)
+				})
+			}
+
+			const titleKeys = Object.keys(this.installmentMonth[0])
+			const refinedData = []
+			
+			refinedData.push(titleKeys)
+			this.installmentMonth.forEach(item => {
+				refinedData.push(Object.values(item))  
+			})
+
+			let csvContent = ''
+			refinedData.forEach(row => {
+				csvContent += '"' + row.join('","') + '"' + '\n'
+			})
+
+			const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
+			const objUrl = URL.createObjectURL(blob)
+
+			const link = document.querySelector('#downloadCSV');
+			link.setAttribute('href', objUrl)
+			link.setAttribute('download', 'planilha-de-parcelas.csv')
+
 		}
 	},
 	mounted() {
@@ -197,6 +249,8 @@ export default {
 			suffixUnit: '%',
 			zeroCents: false
 		});
+
+		// this.installmentMonthByMonth();
 	}
 }
 </script>
