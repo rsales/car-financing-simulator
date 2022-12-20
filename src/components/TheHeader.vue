@@ -15,9 +15,9 @@
 		<div>
 			<nav class="flex h-9 items-center justify-between" aria-label="Global">
 				<div class="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-					<a href="#" class="-m-1.5 p-1.5">
-						<span class="sr-only">Your Company</span>
-						<img class="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
+					<a href="#" class="-m-1.5 p-1.5 text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700">
+            Simula Car
+						<!-- <img class="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""> -->
 					</a>
 				</div>
 				<div class="flex lg:hidden">
@@ -80,3 +80,13 @@
 	</main>
 </div>
 </template>
+
+
+<script>
+import BrandIcon from '../components/BrandIcon.vue'
+export default {
+	components: {
+		BrandIcon,
+	}
+}
+</script>
