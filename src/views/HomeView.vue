@@ -163,6 +163,13 @@ export default {
 			return this.showResult || !this.carPrice || !this.installments || !this.tax;
 		}
 	},
+  watch: {
+    showResult(value) {
+      if(!value) {
+        this.installmentMonth = []
+      }
+    }
+  },
 	methods: {
     moneyFormatter(value) {
       const formatter = new Intl.NumberFormat('pt-BR', {
