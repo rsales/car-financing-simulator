@@ -1,7 +1,7 @@
 <template>
   <footer class="flex justify-center px-4 text-gray-800 bg-white mt-10">
     <div class="container px-6 py-6 relative">
-      <CarIllustration class="scale-50 absolute bottom-1/3 right-0" />
+      <!-- <CarIllustration class="scale-50 absolute bottom-1/3 right-0" /> -->
       <hr class="h-px bg-gray-200 border-none mt-3 mb-7" />
 
       <div class="flex flex-col items-center justify-between md:flex-row">

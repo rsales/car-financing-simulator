@@ -1,8 +1,10 @@
 <template>
 	<BannerInfo v-show="false" />
 	<TheHeader />
-	<div class="container mx-auto px-4">
+	<div class="container mx-auto px-40">
+    
 		<form id="form" class="pt-6">
+      <h2 class="text-3xl mb-10 font-black">Minha Simulação:</h2>
 			<div class="mb-4">
 				<label class="block text-gray-700 text-sm font-bold mb-2" for="carPrice">
 					Valor do Carro:

@@ -40,8 +40,9 @@
 	</div>
 	<main>
 		<div class="relative px-6 lg:px-8">
-			<div class="mx-auto max-w-3xl pt-20 pb-32 sm:pt-32 sm:pb-40">
+			<div class="mx-auto max-w-3xl pt-2 pb-32 sm:pt-2 sm:pb-40">
 				<div>
+          <img class="w-96 mt-5 mx-auto" src="../assets/new_car_3d.png" alt="">
 					<div class="hidden sm:mb-8 sm:flex sm:justify-center">
 						<div class="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
 							<span class="text-gray-600">
